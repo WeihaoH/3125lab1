@@ -25,8 +25,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPref = getSharedPreferences("SP",Context.MODE_PRIVATE);
         String pretip=sharedPref.getString("tip","10");
+
+
         TextView tip= (TextView)findViewById(R.id.tvTip);
         tip.setText(pretip);
+
+        String unit=sharedPref.getString("unit","Dollar");
+        String unMark = null;
+        switch (unit){
+            case "Dollar":
+                unMark="$";
+                break;
+            case "Euro":
+                unMark="€";
+            case "Pound":
+                unMark="£";
+        }
+        TextView billUnit= (TextView)findViewById(R.id.tv_unit);
+        billUnit.setText(unMark);
+
     }
     public void OnSetSummaryButton(View view) {
         Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
@@ -76,6 +93,19 @@ public class MainActivity extends AppCompatActivity {
             String pretip=sharedPref.getString("tip","10");
             TextView tip = (TextView)findViewById(R.id.tvTip);
             tip.setText(pretip);
+            String unit=sharedPref.getString("unit","Dollar");
+            String unMark = null;
+            switch (unit){
+                case "Dollar":
+                    unMark="$";
+                    break;
+                case "Euro":
+                    unMark="€";
+                case "Pound":
+                    unMark="£";
+            }
+            TextView billUnit= (TextView)findViewById(R.id.tv_unit);
+            billUnit.setText(unMark);
             Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
         }
         else if(requestCode == 2) {
